@@ -36,7 +36,7 @@ function initialPrompt() {
    return word;
 };
 
-let simpleScorer = function (word) {
+let simpleScorer = function(word){
    return word.length;
 };
 
@@ -58,22 +58,25 @@ word = word.toUpperCase();
 		 if (vowelScorerStructure[pointValue].includes(word[i])) {
          wordPoints = wordPoints + Number(pointValue);
 		 }
- 
-	  }
+      
+      }
 	}
 	return wordPoints;
- }
+}
 
 // oldScoring with new scoring object
 
-   function scrabbleScorer (word){
+function scrabbleScorer (word){
+
    word = word.toLowerCase()
    let  wordPoint = 0;
+
    for (let i =0; i < word.length; i++){
          wordPoint += Number(newPointStructure[word[i]]);
-}
-return wordPoint;
-};;
+
+  }
+   return wordPoint;
+};
 
 const scoringAlgorithms = [
    {
@@ -93,34 +96,34 @@ const scoringAlgorithms = [
    }
 ];
 
-function scorerPrompt(scoringAlgorithms) {
+function scorerPrompt(scoringAlgorithms){
 
-let num = Number(input.question(`
-Which Scoring Algorithm would you like to use?
+   let num = Number(input.question(`
+   Which Scoring Algorithm would you like to use?
 
-0 - Simple: Each letter is worth 1 point.
-1 - Vowels are 3 points, consonants are 1 point.
-2 - Use scrabble scoring system.
-Please enter 0, 1, or 2: `
-));
-return num
+   0 - Simple: Each letter is worth 1 point.
+   1 - Vowels are 3 points, consonants are 1 point.
+   2 - Use scrabble scoring system.
+   Please enter 0, 1, or 2: `
+   ));
+   return num
 // return scoringAlgorithms[num]
 }
 
 
 function transform(oldPointStructure) {
    let newPointStructure = {};
-  for (const score in oldPointStructure) {
-    for (const letter of oldPointStructure[score]) {
+      for (const score in oldPointStructure) {
+         for (const letter of oldPointStructure[score]) {
       newPointStructure[letter.toLowerCase()] = Number(score);
-    }
-  }
-  return newPointStructure;
+         }
+      }
+      return newPointStructure;
 }
 
 let newPointStructure = (transform(oldPointStructure));
 
-function runProgram() {   
+function runProgram(){
    initialPrompt()
    let num = scorerPrompt();
    num = Number(num);
